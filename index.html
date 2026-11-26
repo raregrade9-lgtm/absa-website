@@ -2,249 +2,322 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Absa – Banking, Loans & Savings (Demo)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a0309">
+<title>Absa Bank – Digital Banking</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--red:#d5003a;--red-d:#a8002e;--ink:#1c1b1f;--mute:#5f5c66;--bg:#fff;--soft:#f6f1f2;--line:#e6dde0;--r:14px}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
-a{color:inherit;text-decoration:none}
-button{font:inherit;cursor:pointer}
-:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
-.wrap{max-width:1160px;margin:0 auto;padding:0 20px}
-.util{background:var(--ink);color:#ddd;font-size:.82rem}
-.util .wrap{display:flex;justify-content:flex-end;gap:22px;padding:7px 20px}
-.util a:hover{color:#fff}
-header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:20}
-.nav{display:flex;align-items:center;gap:28px;height:68px}
-.logo{font-weight:700;font-size:1.9rem;letter-spacing:-.04em;color:var(--red)}
-.nav ul{display:flex;gap:6px;list-style:none;margin-left:12px}
-.nav ul a{padding:8px 14px;border-radius:99px;font-weight:500}
-.nav ul a:hover{background:var(--soft)}
-.sp{flex:1}
-.btn{display:inline-block;border:0;border-radius:99px;padding:11px 24px;font-weight:600;background:var(--red);color:#fff}
-.btn:hover{background:var(--red-d)}
-.btn.ghost{background:#fff;color:var(--red);border:2px solid var(--red)}
-.btn.ghost:hover{background:var(--soft)}
-.burger{display:none;background:none;border:0;font-size:1.6rem}
-.hero{background:var(--red);color:#fff;overflow:hidden}
-.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:64px 20px 72px}
-.hero h1{font-size:clamp(2.4rem,5.4vw,4.2rem);line-height:1.02;letter-spacing:-.035em;font-weight:700;margin-bottom:20px}
-.hero p{font-size:1.15rem;max-width:46ch;opacity:.93;margin-bottom:28px}
-.hero .btn{background:#fff;color:var(--red)}
-.hero .btn:hover{background:var(--soft)}
-.hero .btn.ghost{background:transparent;color:#fff;border-color:#fff;margin-left:10px}
-.hero .btn.ghost:hover{background:rgba(255,255,255,.14)}
-.calc{background:#fff;color:var(--ink);border-radius:20px;padding:28px;box-shadow:0 24px 50px rgba(60,0,15,.35)}
-.calc h2{font-size:1.2rem;margin-bottom:18px}
-.calc label{display:flex;justify-content:space-between;font-weight:600;font-size:.92rem;margin-top:16px}
-.calc label b{color:var(--red)}
-input[type=range]{width:100%;accent-color:var(--red);margin-top:8px}
-.out{margin-top:22px;padding:18px;border-radius:var(--r);background:var(--soft)}
-.out .big{font-size:2.3rem;font-weight:700;letter-spacing:-.03em;color:var(--red);line-height:1.1}
-.out small{color:var(--mute);display:block;margin-top:6px}
-.fine{font-size:.78rem;color:var(--mute);margin-top:12px}
-section{padding:76px 0}
-h2.t{font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.03em;line-height:1.1;margin-bottom:10px}
-.lead{color:var(--mute);max-width:56ch;margin-bottom:34px}
-.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
-.tabs button{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:9px 20px;font-weight:600}
-.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
-.panel{display:grid;grid-template-columns:1fr 1fr;gap:40px;background:var(--soft);border-radius:22px;padding:40px;align-items:center}
-.panel h3{font-size:1.7rem;letter-spacing:-.02em;margin-bottom:10px}
-.panel ul{margin:16px 0 24px 20px;color:var(--mute)}
-.panel li{margin-bottom:6px}
-.stat{background:#fff;border-radius:var(--r);padding:26px;border-left:6px solid var(--red)}
-.stat strong{display:block;font-size:2.6rem;letter-spacing:-.03em;color:var(--red);line-height:1.1}
-.ways{background:var(--ink);color:#fff}
-.ways .lead{color:#c9c5cf}
-.wgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid #444}
-.wgrid div{padding:26px 22px 8px 0;border-right:1px solid #444;margin-right:22px}
-.wgrid div:last-child{border:0;margin:0}
-.wgrid h3{font-size:1.1rem;margin-bottom:6px}
-.wgrid p{color:#c9c5cf;font-size:.95rem}
-.find{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.find input{flex:1;min-width:220px;padding:13px 18px;border:1.5px solid var(--line);border-radius:99px;font:inherit}
-.res{list-style:none}
-.res li{padding:16px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px}
-.res span{color:var(--mute)}
-footer{background:var(--soft);padding:46px 0 30px;font-size:.92rem}
-.fgrid{display:grid;grid-template-columns:1.4fr repeat(3,1fr);gap:30px;margin-bottom:30px}
-.fgrid h4{margin-bottom:10px}
-.fgrid a{display:block;color:var(--mute);margin-bottom:6px}
-.fgrid a:hover{color:var(--red)}
-.disc{color:var(--mute);font-size:.8rem;border-top:1px solid var(--line);padding-top:18px}
-dialog{border:0;border-radius:20px;padding:32px;width:min(400px,92vw);margin:auto;box-shadow:0 30px 80px rgba(0,0,0,.4)}
-dialog::backdrop{background:rgba(20,0,6,.6)}
-dialog h2{margin-bottom:16px}
-dialog label{display:block;font-weight:600;font-size:.9rem;margin-top:12px}
-dialog input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;font:inherit;margin-top:6px}
-dialog .row{display:flex;gap:10px;margin-top:22px}
-.msg{margin-top:14px;font-size:.88rem;color:var(--red-d);min-height:1.2em}
-@media(max-width:860px){
- .hero .wrap,.panel{grid-template-columns:1fr}
- .wgrid{grid-template-columns:1fr 1fr}.wgrid div{border:0;margin:0;padding:20px 10px 0 0}
- .fgrid{grid-template-columns:1fr 1fr}
- .burger{display:block}
- .nav ul{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;padding:12px 20px;margin:0;border-bottom:1px solid var(--line)}
- .nav ul.open{display:flex}
- .panel{padding:26px}
+:root{
+  --red:#DC0032; --red-deep:#AF144B; --maroon:#3a0615; --ink:#12020a;
+  --text:#fff; --muted:rgba(255,255,255,.62);
+  --glass:rgba(255,255,255,.09); --glass-b:rgba(255,255,255,.2);
+  --ok:#3ddc97; --radius:26px;
 }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Poppins',system-ui,sans-serif;color:var(--text);background:var(--ink);overflow-x:hidden;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+/* animated background */
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(120% 80% at 50% 0%,#4a0a1c 0%,var(--ink) 70%)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;animation:float 14s ease-in-out infinite}
+.b1{width:320px;height:320px;background:var(--red);top:-80px;left:-80px}
+.b2{width:280px;height:280px;background:var(--red-deep);bottom:-60px;right:-60px;animation-delay:-5s}
+.b3{width:200px;height:200px;background:#ff5a7a;top:45%;left:55%;opacity:.35;animation-delay:-9s}
+@keyframes float{50%{transform:translate(30px,-40px) scale(1.12)}}
+
+/* glass */
+.glass{background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--radius);
+  backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
+  box-shadow:0 12px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}
+
+/* pill buttons */
+.btn{appearance:none;border:0;cursor:pointer;font:600 15px 'Poppins',sans-serif;color:#fff;
+  padding:15px 28px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,var(--red),var(--red-deep));
+  box-shadow:0 8px 22px rgba(220,0,50,.45),inset 0 1px 0 rgba(255,255,255,.3);
+  transition:transform .15s cubic-bezier(.3,.7,.4,1.4),box-shadow .15s,filter .2s}
+.btn:hover{filter:brightness(1.1)}
+.btn:active{transform:scale(.95);box-shadow:0 3px 10px rgba(220,0,50,.4),inset 0 2px 6px rgba(0,0,0,.25)}
+.btn.block{width:100%}
+.btn.ghost{background:var(--glass);border:1px solid var(--glass-b);box-shadow:none;backdrop-filter:blur(12px)}
+.btn.small{padding:10px 18px;font-size:13px}
+.btn:disabled{opacity:.6;pointer-events:none}
+
+/* layout */
+.screen{display:none;min-height:100vh;padding:24px 20px 110px;max-width:480px;margin:0 auto}
+.screen.active{display:block;animation:in .5s ease}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:26px;letter-spacing:-.5px}
+.logo i{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--red),var(--red-deep));
+  display:grid;place-items:center;font-style:normal;font-size:22px;box-shadow:0 6px 18px rgba(220,0,50,.5)}
+
+/* auth */
+#auth{display:none;align-items:center;justify-content:center}
+#auth.active{display:flex}
+.auth-card{width:100%;padding:30px 24px}
+.auth-card h2{font-size:24px;margin:22px 0 4px}
+.auth-card p.sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+.tabs{display:flex;padding:5px;border-radius:999px;background:rgba(0,0,0,.28);margin-bottom:6px}
+.tabs button{flex:1;border:0;background:none;color:var(--muted);font:600 14px 'Poppins';padding:11px;border-radius:999px;cursor:pointer;transition:.25s}
+.tabs button.on{background:linear-gradient(135deg,var(--red),var(--red-deep));color:#fff;box-shadow:0 4px 14px rgba(220,0,50,.4)}
+.field{position:relative;margin-bottom:14px}
+.field input{width:100%;padding:16px 20px;border-radius:999px;border:1px solid var(--glass-b);background:rgba(0,0,0,.25);
+  color:#fff;font:500 15px 'Poppins';outline:none;transition:.2s}
+.field input::placeholder{color:rgba(255,255,255,.4)}
+.field input:focus{border-color:#ff5a7a;box-shadow:0 0 0 4px rgba(220,0,50,.25)}
+.eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--muted);cursor:pointer;padding:10px;font-size:16px}
+.msg{min-height:20px;font-size:13px;margin:2px 6px 12px;color:#ff8da3}
+.msg.ok{color:var(--ok)}
+.note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.5}
+
+/* dashboard */
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.hello small{display:block;color:var(--muted);font-size:13px}
+.hello b{font-size:20px}
+.avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:700;
+  background:linear-gradient(135deg,var(--red),var(--red-deep));box-shadow:0 6px 16px rgba(220,0,50,.45);border:2px solid var(--glass-b)}
+.balance{padding:26px 24px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(220,0,50,.55),rgba(175,20,75,.35))}
+.balance::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-70px;top:-90px;background:rgba(255,255,255,.12)}
+.balance small{color:rgba(255,255,255,.8);font-size:13px}
+.amount{font-size:38px;font-weight:700;letter-spacing:-1px;margin:6px 0 14px;display:flex;align-items:center;gap:10px}
+.amount button{border:0;background:rgba(255,255,255,.15);color:#fff;border-radius:999px;width:34px;height:34px;cursor:pointer;font-size:15px;transition:transform .15s}
+.amount button:active{transform:scale(.9)}
+.acc-no{font-size:13px;letter-spacing:2px;color:rgba(255,255,255,.75)}
+.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0 26px}
+.act{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:var(--muted);background:none;border:0;cursor:pointer;font-family:inherit}
+.act span{width:62px;height:62px;border-radius:999px;display:grid;place-items:center;font-size:24px;
+  background:var(--glass);border:1px solid var(--glass-b);backdrop-filter:blur(14px);transition:transform .15s cubic-bezier(.3,.7,.4,1.4),background .2s}
+.act:active span{transform:scale(.92);background:rgba(220,0,50,.4)}
+h3{font-size:17px;margin:4px 4px 12px;display:flex;justify-content:space-between;align-items:center}
+.cards{display:flex;gap:14px;overflow-x:auto;padding:2px 2px 16px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.cards::-webkit-scrollbar{display:none}
+.mini{min-width:210px;padding:18px;scroll-snap-align:start}
+.mini small{color:var(--muted);font-size:12px}
+.mini b{display:block;font-size:22px;margin:4px 0 10px}
+.chip{display:inline-block;font-size:11px;padding:5px 12px;border-radius:999px;background:rgba(61,220,151,.15);color:var(--ok)}
+.tx{padding:8px 16px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.row:last-child{border:0}
+.ico{width:44px;height:44px;border-radius:999px;display:grid;place-items:center;background:rgba(255,255,255,.1);font-size:19px}
+.row div.t{flex:1}.row b{font-size:14.5px;display:block;font-weight:500}.row small{color:var(--muted);font-size:12px}
+.neg{color:#fff}.pos{color:var(--ok)}
+.row em{font-style:normal;font-weight:600;font-size:14.5px}
+
+/* profile */
+.prof{padding:28px 22px;text-align:center}
+.prof .avatar{width:84px;height:84px;font-size:32px;margin:0 auto 14px}
+.prof p{color:var(--muted);font-size:14px;margin-bottom:22px}
+
+/* bottom nav */
+nav{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);display:none;gap:6px;padding:8px;
+  border-radius:999px;z-index:10;width:min(340px,calc(100% - 32px))}
+nav.show{display:flex}
+nav button{flex:1;border:0;background:none;color:var(--muted);font:600 12px 'Poppins';padding:10px 6px;border-radius:999px;cursor:pointer;transition:.25s}
+nav button:active{transform:scale(.93)}
+nav button.on{background:linear-gradient(135deg,var(--red),var(--red-deep));color:#fff;box-shadow:0 4px 14px rgba(220,0,50,.45)}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:20;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
+.modal.show{display:flex}
+.sheet{width:100%;max-width:480px;padding:26px 22px 34px;border-radius:32px 32px 0 0;background:rgba(40,6,18,.85);animation:up .35s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes up{from{transform:translateY(100%)}}
+.sheet h3{font-size:20px;margin-bottom:16px}
+.toast{position:fixed;top:calc(18px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-120px);z-index:30;padding:13px 22px;border-radius:999px;font-size:14px;font-weight:500;transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
+.toast.show{transform:translate(-50%,0)}
 </style>
 </head>
 <body>
+<div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="toast glass" id="toast"></div>
 
-<div class="util"><div class="wrap">
-  <a href="#find">Find a branch or ATM</a><a href="#">Contact us</a><a href="#">English</a>
-</div></div>
-
-<header>
-  <div class="wrap nav">
-    <a class="logo" href="#top" aria-label="Absa home">Absa</a>
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">☰</button>
-    <ul id="menu">
-      <li><a href="#products">Personal</a></li>
-      <li><a href="#products">Business</a></li>
-      <li><a href="#ways">Ways to bank</a></li>
-      <li><a href="#find">Branches</a></li>
-    </ul>
-    <span class="sp"></span>
-    <button class="btn" id="loginBtn">Log in</button>
+<!-- AUTH -->
+<section class="screen" id="auth">
+  <div class="glass auth-card">
+    <div class="logo"><i>A</i>absa</div>
+    <h2 id="authTitle">Welcome back</h2>
+    <p class="sub" id="authSub">Sign in to your digital banking.</p>
+    <div class="tabs"><button class="on" data-m="in">Sign in</button><button data-m="up">Register</button></div>
+    <div style="height:16px"></div>
+    <div class="field" id="nameF" style="display:none"><input id="name" placeholder="Full name" autocomplete="name"></div>
+    <div class="field"><input id="email" type="email" placeholder="Email address" autocomplete="email"></div>
+    <div class="field"><input id="pass" type="password" placeholder="Password (min 8 characters)" autocomplete="current-password">
+      <button class="eye" id="eye" type="button" aria-label="Show password">👁</button></div>
+    <div class="msg" id="msg"></div>
+    <button class="btn block" id="go">Sign in</button>
+    <p class="note">Demo app for learning purposes. Not affiliated with Absa Group. Never enter real banking credentials.</p>
   </div>
-</header>
+</section>
 
-<main id="top">
-<div class="hero"><div class="wrap">
-  <div>
-    <h1>Bank on your own terms.</h1>
-    <p>Everyday accounts, loans and savings that fit around your life, with fees you can see before you commit.</p>
-    <a class="btn" href="#products">Open an account</a><a class="btn ghost" href="#find">Find a branch</a>
+<!-- HOME -->
+<section class="screen" id="home">
+  <div class="top">
+    <div class="hello"><small>Good day,</small><b id="hName">–</b></div>
+    <div class="avatar" id="hAv">A</div>
   </div>
-  <form class="calc" onsubmit="return false" aria-labelledby="ch">
-    <h2 id="ch">Estimate your monthly repayment</h2>
-    <label for="amt">Loan amount <b id="amtV"></b></label>
-    <input id="amt" type="range" min="10000" max="500000" step="5000" value="120000">
-    <label for="trm">Repayment period <b id="trmV"></b></label>
-    <input id="trm" type="range" min="12" max="72" step="6" value="48">
-    <label for="rate">Interest rate (p.a.) <b id="rateV"></b></label>
-    <input id="rate" type="range" min="9" max="25" step="0.25" value="15">
-    <div class="out" aria-live="polite">
-      <div class="big" id="pay"></div>
-      <small>per month · total repayable <strong id="tot"></strong></small>
+  <div class="glass balance">
+    <small>Cheque account balance</small>
+    <div class="amount"><span id="bal">R 0.00</span><button id="hide" aria-label="Hide balance">👁</button></div>
+    <div class="acc-no">•••• •••• 4821</div>
+  </div>
+  <div class="actions">
+    <button class="act" data-a="send"><span>💸</span>Send</button>
+    <button class="act" data-a="pay"><span>🧾</span>Pay</button>
+    <button class="act" data-a="buy"><span>📱</span>Buy</button>
+    <button class="act" data-a="save"><span>🐷</span>Save</button>
+  </div>
+  <h3>My accounts</h3>
+  <div class="cards">
+    <div class="glass mini"><small>Savings</small><b id="sav">R 0.00</b><span class="chip">+4.2% p.a.</span></div>
+    <div class="glass mini"><small>Credit card</small><b>R 12 500.00</b><span class="chip">Available</span></div>
+    <div class="glass mini"><small>Rewards</small><b>3 480 pts</b><span class="chip">Silver</span></div>
+  </div>
+  <h3>Recent activity</h3>
+  <div class="glass tx" id="txHome"></div>
+</section>
+
+<!-- ACTIVITY -->
+<section class="screen" id="activity">
+  <div class="top"><div class="logo"><i>A</i>Activity</div></div>
+  <div class="glass tx" id="txAll"></div>
+</section>
+
+<!-- PROFILE -->
+<section class="screen" id="profile">
+  <div class="top"><div class="logo"><i>A</i>Profile</div></div>
+  <div class="glass prof">
+    <div class="avatar" id="pAv">A</div>
+    <h3 style="justify-content:center;font-size:21px" id="pName">–</h3>
+    <p id="pMail">–</p>
+    <button class="btn block" id="logout">Sign out</button>
+  </div>
+</section>
+
+<nav class="glass" id="nav">
+  <button class="on" data-s="home">Home</button>
+  <button data-s="activity">Activity</button>
+  <button data-s="profile">Profile</button>
+</nav>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="sheet glass">
+    <h3 id="mTitle">Send money</h3>
+    <div class="field"><input id="mTo" placeholder="Recipient / reference"></div>
+    <div class="field"><input id="mAmt" type="number" inputmode="decimal" placeholder="Amount (R)"></div>
+    <div class="msg" id="mMsg"></div>
+    <div style="display:flex;gap:10px">
+      <button class="btn ghost" id="mCancel" style="flex:1">Cancel</button>
+      <button class="btn" id="mOk" style="flex:1.4">Confirm</button>
     </div>
-    <p class="fine">Illustration only. Your actual rate depends on your credit assessment.</p>
-  </form>
-</div></div>
-
-<section id="products"><div class="wrap">
-  <h2 class="t">Products for how you live</h2>
-  <p class="lead">Pick a need and see what is on offer.</p>
-  <div class="tabs" role="tablist" id="tabs"></div>
-  <div class="panel" id="panel" role="tabpanel"></div>
-</div></section>
-
-<section class="ways" id="ways"><div class="wrap">
-  <h2 class="t">Bank wherever you are</h2>
-  <p class="lead">Do the everyday things from your phone, and visit us when you want to talk it through.</p>
-  <div class="wgrid">
-    <div><h3>Banking app</h3><p>Check balances, pay beneficiaries and manage cards from your phone.</p></div>
-    <div><h3>Online banking</h3><p>Larger payments, statements and account settings on a bigger screen.</p></div>
-    <div><h3>ATMs</h3><p>Withdraw and deposit cash at thousands of ATMs across the country.</p></div>
-    <div><h3>Branches</h3><p>Sit down with a consultant for loans, home finance and business needs.</p></div>
   </div>
-</div></section>
-
-<section id="find"><div class="wrap">
-  <h2 class="t">Find a branch or ATM</h2>
-  <p class="lead">Search by city or suburb.</p>
-  <div class="find">
-    <input id="q" type="search" placeholder="e.g. Pretoria, Sandton, Cape Town" aria-label="Search location">
-    <button class="btn" id="go">Search</button>
-  </div>
-  <ul class="res" id="res"></ul>
-</div></section>
-</main>
-
-<footer><div class="wrap">
-  <div class="fgrid">
-    <div><div class="logo" style="font-size:1.6rem">Absa</div><p style="color:var(--mute);margin-top:8px;max-width:30ch">Banking for people and businesses.</p></div>
-    <div><h4>Personal</h4><a href="#">Accounts</a><a href="#">Savings</a><a href="#">Home loans</a></div>
-    <div><h4>Business</h4><a href="#">Business accounts</a><a href="#">Merchant services</a><a href="#">Business loans</a></div>
-    <div><h4>Support</h4><a href="#">Contact us</a><a href="#">Security centre</a><a href="#">Fees and pricing</a></div>
-  </div>
-  <p class="disc">This is a demonstration website built for learning purposes. It is not affiliated with, or endorsed by, Absa Group Limited. Names, rates and locations shown are examples only.</p>
-</div></footer>
-
-<dialog id="dlg">
-  <form id="lf">
-    <h2>Log in</h2>
-    <label for="u">Username</label><input id="u" autocomplete="off" required>
-    <label for="p">Password</label><input id="p" type="password" required>
-    <p class="msg" id="msg"></p>
-    <div class="row"><button class="btn" type="submit">Log in</button><button class="btn ghost" type="button" id="cancel">Cancel</button></div>
-  </form>
-</dialog>
+</div>
 
 <script>
-const $=id=>document.getElementById(id);
-const R=n=>"R "+Math.round(n).toLocaleString("en-ZA");
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const DB='absa_demo_users', SES='absa_demo_session';
+const load=()=>{try{return JSON.parse(localStorage.getItem(DB))||{}}catch(e){return{}}};
+const save=u=>localStorage.setItem(DB,JSON.stringify(u));
+const fmt=n=>'R '+n.toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
+let mode='in', user=null, hidden=false, action='send', fails=0;
 
-/* Loan calculator */
-function calc(){
-  const P=+$("amt").value,n=+$("trm").value,a=+$("rate").value,r=a/100/12;
-  const m=P*r/(1-Math.pow(1+r,-n));
-  $("amtV").textContent=R(P);$("trmV").textContent=n+" months";$("rateV").textContent=a.toFixed(2)+"%";
-  $("pay").textContent=R(m);$("tot").textContent=R(m*n);
+async function hash(pw,salt){
+  if(!crypto.subtle) return btoa(salt+pw);
+  const k=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveBits']);
+  const b=await crypto.subtle.deriveBits({name:'PBKDF2',salt:new TextEncoder().encode(salt),iterations:150000,hash:'SHA-256'},k,256);
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
 }
-["amt","trm","rate"].forEach(i=>$(i).addEventListener("input",calc));calc();
-
-/* Product tabs */
-const prods=[
- {k:"Everyday banking",h:"One account for daily spending",l:["Card and phone payments","Notifications for every transaction","Choose the account that matches your usage"],s:["R0","set-up fee in this demo"]},
- {k:"Savings",h:"Put money aside for what is next",l:["Flexible access savings","Fixed deposits for set goals","Interest paid on your balance"],s:["Up to 8%","example savings rate p.a."]},
- {k:"Home loans",h:"Finance the place you want to live in",l:["Apply online and track progress","Repayments to suit your budget","Guidance from a home finance consultant"],s:["20 years","maximum example term"]},
- {k:"Insurance",h:"Cover the things that matter",l:["Car, home and life cover","Claims logged from your phone","Pay monthly"],s:["From R99","example monthly premium"]}
-];
-const tabs=$("tabs"),panel=$("panel");
-function show(i){
-  [...tabs.children].forEach((b,j)=>b.setAttribute("aria-selected",j===i));
-  const p=prods[i];
-  panel.innerHTML=`<div><h3>${p.h}</h3><ul>${p.l.map(x=>`<li>${x}</li>`).join("")}</ul><a class="btn" href="#top">Apply now</a></div><div class="stat"><strong>${p.s[0]}</strong>${p.s[1]}</div>`;
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2400)}
+function show(id){
+  $$('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
+  $('#nav').classList.toggle('show',id!=='auth');
+  $$('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===id));
+  scrollTo(0,0);
 }
-prods.forEach((p,i)=>{const b=document.createElement("button");b.textContent=p.k;b.setAttribute("role","tab");b.onclick=()=>show(i);tabs.appendChild(b)});
-show(0);
 
-/* Branch finder */
-const places=[
- ["Pretoria – Menlyn","Menlyn Park Shopping Centre, Atterbury Rd","Branch + ATM"],
- ["Pretoria – Hatfield","Burnett St, Hatfield","Branch + ATM"],
- ["Pretoria – Centurion","Centurion Mall, Heuwel Rd","Branch + ATM"],
- ["Johannesburg – Sandton","Sandton City, Rivonia Rd","Branch + ATM"],
- ["Johannesburg – Rosebank","The Zone, Oxford Rd","ATM"],
- ["Cape Town – V&A Waterfront","Victoria Wharf","Branch + ATM"],
- ["Cape Town – Claremont","Cavendish Square","Branch + ATM"],
- ["Durban – Gateway","Gateway Theatre of Shopping, Umhlanga","Branch + ATM"]
-];
-function find(){
-  const q=$("q").value.trim().toLowerCase();
-  const f=places.filter(p=>!q||(p[0]+p[1]).toLowerCase().includes(q));
-  $("res").innerHTML=f.length?f.map(p=>`<li><div><strong>${p[0]}</strong><br><span>${p[1]}</span></div><span>${p[2]}</span></li>`).join(""):`<li><span>No locations match “${q.replace(/[<>&]/g,"")}”. Try a city name like Pretoria or Cape Town.</span></li>`;
+/* auth UI */
+$$('.tabs button').forEach(b=>b.onclick=()=>{
+  mode=b.dataset.m;
+  $$('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  $('#nameF').style.display=mode==='up'?'block':'none';
+  $('#authTitle').textContent=mode==='up'?'Open your profile':'Welcome back';
+  $('#authSub').textContent=mode==='up'?'Create your demo account in seconds.':'Sign in to your digital banking.';
+  $('#go').textContent=mode==='up'?'Create account':'Sign in';
+  $('#pass').autocomplete=mode==='up'?'new-password':'current-password';
+  $('#msg').textContent='';
+});
+$('#eye').onclick=()=>{const p=$('#pass');p.type=p.type==='password'?'text':'password'};
+['email','pass','name'].forEach(i=>$('#'+i).addEventListener('keydown',e=>{if(e.key==='Enter')$('#go').click()}));
+
+$('#go').onclick=async()=>{
+  const msg=$('#msg'), email=$('#email').value.trim().toLowerCase(), pw=$('#pass').value, name=$('#name').value.trim();
+  msg.className='msg';
+  if(!/^\S+@\S+\.\S+$/.test(email)) return msg.textContent='Enter a valid email address.';
+  if(pw.length<8) return msg.textContent='Password must be at least 8 characters.';
+  if(fails>=5) return msg.textContent='Too many attempts. Refresh the page and try again.';
+  const users=load(), btn=$('#go'); btn.disabled=true;
+  try{
+    if(mode==='up'){
+      if(name.length<2) return msg.textContent='Please enter your full name.';
+      if(users[email]) return msg.textContent='An account with this email already exists.';
+      const salt=crypto.getRandomValues?[...crypto.getRandomValues(new Uint8Array(8))].join(''):String(Date.now());
+      users[email]={name,email,salt,hash:await hash(pw,salt),balance:24850.75,savings:61200,
+        tx:[{t:'Salary – Absa Payroll',d:'Today',a:32500,i:'💼'},{t:'Woolworths Food',d:'Yesterday',a:-684.2,i:'🛒'},
+            {t:'Uber Trip',d:'2 days ago',a:-132.5,i:'🚗'},{t:'Netflix',d:'3 days ago',a:-199,i:'🎬'},{t:'Discovery Vitality',d:'4 days ago',a:-420,i:'💪'}]};
+      save(users); msg.className='msg ok'; msg.textContent='Account created!';
+      localStorage.setItem(SES,email); setTimeout(enter,500);
+    }else{
+      const u=users[email];
+      if(!u||u.hash!==await hash(pw,u.salt)){fails++;return msg.textContent='Incorrect email or password.'}
+      fails=0; localStorage.setItem(SES,email); enter();
+    }
+  }finally{btn.disabled=false}
+};
+
+/* app */
+function enter(){
+  user=load()[localStorage.getItem(SES)];
+  if(!user){show('auth');return}
+  $('#hName').textContent=user.name.split(' ')[0];
+  $('#pName').textContent=user.name; $('#pMail').textContent=user.email;
+  $('#hAv').textContent=$('#pAv').textContent=user.name[0].toUpperCase();
+  render(); show('home');
+  $('#pass').value='';
 }
-$("go").onclick=find;$("q").addEventListener("keydown",e=>{if(e.key==="Enter")find()});find();
+function render(){
+  $('#bal').textContent=hidden?'R ••••••':fmt(user.balance);
+  $('#sav').textContent=fmt(user.savings);
+  const row=x=>`<div class="row"><div class="ico">${x.i}</div><div class="t"><b>${x.t}</b><small>${x.d}</small></div>
+    <em class="${x.a>0?'pos':'neg'}">${x.a>0?'+':'−'} ${fmt(Math.abs(x.a))}</em></div>`;
+  $('#txHome').innerHTML=user.tx.slice(0,4).map(row).join('');
+  $('#txAll').innerHTML=user.tx.map(row).join('');
+}
+function persist(){const u=load();u[user.email]=user;save(u);render()}
+$('#hide').onclick=()=>{hidden=!hidden;render()};
+$$('#nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
+$('#logout').onclick=()=>{localStorage.removeItem(SES);user=null;show('auth');toast('Signed out securely')};
 
-/* Login dialog (demo only) */
-const dlg=$("dlg");
-$("loginBtn").onclick=()=>{$("msg").textContent="";dlg.showModal()};
-$("cancel").onclick=()=>dlg.close();
-$("lf").onsubmit=e=>{e.preventDefault();$("msg").textContent="This is a demo. No real sign-in takes place, so don’t enter real banking details."};
+/* actions */
+const T={send:['Send money','💸','Recipient name'],pay:['Pay a beneficiary','🧾','Beneficiary / reference'],buy:['Buy airtime & data','📱','Cell number'],save:['Move to savings','🐷','Savings goal (optional)']};
+$$('.act').forEach(b=>b.onclick=()=>{
+  action=b.dataset.a; $('#mTitle').textContent=T[action][0]; $('#mTo').placeholder=T[action][2];
+  $('#mTo').value=$('#mAmt').value=$('#mMsg').textContent=''; $('#modal').classList.add('show');
+});
+$('#mCancel').onclick=()=>$('#modal').classList.remove('show');
+$('#modal').onclick=e=>{if(e.target.id==='modal')$('#modal').classList.remove('show')};
+$('#mOk').onclick=()=>{
+  const amt=parseFloat($('#mAmt').value), to=$('#mTo').value.trim()||T[action][0];
+  if(!(amt>0)) return $('#mMsg').textContent='Enter a valid amount.';
+  if(amt>user.balance) return $('#mMsg').textContent='Insufficient funds.';
+  user.balance=+(user.balance-amt).toFixed(2);
+  if(action==='save') user.savings=+(user.savings+amt).toFixed(2);
+  user.tx.unshift({t:action==='save'?'Transfer to Savings':to,d:'Just now',a:-amt,i:T[action][1]});
+  persist(); $('#modal').classList.remove('show'); toast('Done – '+fmt(amt)+' processed ✓');
+};
 
-/* Mobile menu */
-$("burger").onclick=()=>{const o=$("menu").classList.toggle("open");$("burger").setAttribute("aria-expanded",o)};
-$("menu").onclick=e=>{if(e.target.tagName==="A"){$("menu").classList.remove("open");$("burger").setAttribute("aria-expanded",false)}};
+/* boot */
+(function(){localStorage.getItem(SES)&&load()[localStorage.getItem(SES)]?enter():show('auth')})();
 </script>
 </body>
 </html>
