@@ -1,1 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a0309">
+<title>Absa Bank – Digital Banking</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2718%27 fill=%27%23DC0032%27/%3E%3Ccircle cx=%2730%27 cy=%2734%27 r=%2713%27 fill=%27none%27 stroke=%27white%27 stroke-width=%278%27/%3E%3Cpath d=%27M43 22v26%27 stroke=%27white%27 stroke-width=%278%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#DC0032; --red-deep:#AF144B; --maroon:#3a0615; --ink:#12020a;
+  --text:#fff; --muted:rgba(255,255,255,.62);
+  --glass:rgba(255,255,255,.09); --glass-b:rgba(255,255,255,.2);
+  --ok:#3ddc97; --radius:26px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{font-family:'Poppins',system-ui,sans-serif;color:var(--text);background:var(--ink);overflow-x:hidden;
+  padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+/* animated background */
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(120% 80% at 50% 0%,#4a0a1c 0%,var(--ink) 70%)}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.75;animation:float 14s ease-in-out infinite}
+.b1{width:320px;height:320px;background:var(--red);top:-80px;left:-80px}
+.b2{width:280px;height:280px;background:var(--red-deep);bottom:-60px;right:-60px;animation-delay:-5s}
+.b3{width:200px;height:200px;background:#ff5a7a;top:45%;left:55%;opacity:.35;animation-delay:-9s}
+@keyframes float{50%{transform:translate(30px,-40px) scale(1.12)}}
 
+/* glass */
+.glass{background:var(--glass);border:1px solid var(--glass-b);border-radius:var(--radius);
+  backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
+  box-shadow:0 12px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.18)}
+
+/* pill buttons */
+.btn{appearance:none;border:0;cursor:pointer;font:600 15px 'Poppins',sans-serif;color:#fff;
+  padding:15px 28px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,var(--red),var(--red-deep));
+  box-shadow:0 8px 22px rgba(220,0,50,.45),inset 0 1px 0 rgba(255,255,255,.3);
+  transition:transform .15s cubic-bezier(.3,.7,.4,1.4),box-shadow .15s,filter .2s}
+.btn:hover{filter:brightness(1.1)}
+.btn:active{transform:scale(.95);box-shadow:0 3px 10px rgba(220,0,50,.4),inset 0 2px 6px rgba(0,0,0,.25)}
+.btn.block{width:100%}
+.btn.ghost{background:var(--glass);border:1px solid var(--glass-b);box-shadow:none;backdrop-filter:blur(12px)}
+.btn.small{padding:10px 18px;font-size:13px}
+.btn:disabled{opacity:.6;pointer-events:none}
+
+/* layout */
+.screen{display:none;min-height:100vh;padding:24px 20px 110px;max-width:480px;margin:0 auto}
+.screen.active{display:block;animation:in .5s ease}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+.logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;letter-spacing:-.3px}
+.brand{display:inline-flex;align-items:center;gap:12px;color:#fff;animation:pop .7s cubic-bezier(.3,1.4,.5,1)}
+.brand .ic{height:48px;width:48px;filter:drop-shadow(0 8px 16px rgba(220,0,50,.55))}
+.brand .wm{height:28px;width:auto;color:#fff;display:block}
+.brand.sm{gap:9px}.brand.sm .ic{height:34px;width:34px}.brand.sm .wm{height:19px}
+@keyframes pop{from{transform:scale(.8);opacity:0}}
+
+/* auth */
+#auth{display:none;align-items:center;justify-content:center}
+#auth.active{display:flex}
+.auth-card{width:100%;padding:30px 24px}
+.auth-card h2{font-size:24px;margin:22px 0 4px}
+.auth-card p.sub{color:var(--muted);font-size:14px;margin-bottom:20px}
+.tabs{display:flex;padding:5px;border-radius:999px;background:rgba(0,0,0,.28);margin-bottom:6px}
+.tabs button{flex:1;border:0;background:none;color:var(--muted);font:600 14px 'Poppins';padding:11px;border-radius:999px;cursor:pointer;transition:.25s}
+.tabs button.on{background:linear-gradient(135deg,var(--red),var(--red-deep));color:#fff;box-shadow:0 4px 14px rgba(220,0,50,.4)}
+.field{position:relative;margin-bottom:14px}
+.field input{width:100%;padding:16px 20px;border-radius:999px;border:1px solid var(--glass-b);background:rgba(0,0,0,.25);
+  color:#fff;font:500 15px 'Poppins';outline:none;transition:.2s}
+.field input::placeholder{color:rgba(255,255,255,.4)}
+.field input:focus{border-color:#ff5a7a;box-shadow:0 0 0 4px rgba(220,0,50,.25)}
+.eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:none;color:var(--muted);cursor:pointer;padding:10px;font-size:16px}
+.msg{min-height:20px;font-size:13px;margin:2px 6px 12px;color:#ff8da3}
+.msg.ok{color:var(--ok)}
+.forgot{display:block;text-align:center;margin-top:14px;font-size:13px;color:#ff8da3;text-decoration:none;font-weight:500}
+.forgot:active{opacity:.6}
+.note{font-size:11.5px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.5}
+
+/* dashboard */
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.hello small{display:block;color:var(--muted);font-size:13px}
+.hello b{font-size:20px}
+.avatar{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:700;
+  background:linear-gradient(135deg,var(--red),var(--red-deep));box-shadow:0 6px 16px rgba(220,0,50,.45);border:2px solid var(--glass-b)}
+.balance{padding:26px 24px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,rgba(220,0,50,.55),rgba(175,20,75,.35))}
+.balance::after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-70px;top:-90px;background:rgba(255,255,255,.12)}
+.balance small{color:rgba(255,255,255,.8);font-size:13px}
+.amount{font-size:38px;font-weight:700;letter-spacing:-1px;margin:6px 0 14px;display:flex;align-items:center;gap:10px}
+.amount button{border:0;background:rgba(255,255,255,.15);color:#fff;border-radius:999px;width:34px;height:34px;cursor:pointer;font-size:15px;transition:transform .15s}
+.amount button:active{transform:scale(.9)}
+.acc-no{font-size:13px;letter-spacing:2px;color:rgba(255,255,255,.75)}
+.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:20px 0 26px}
+.act{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:var(--muted);background:none;border:0;cursor:pointer;font-family:inherit}
+.act span{width:62px;height:62px;border-radius:999px;display:grid;place-items:center;font-size:24px;
+  background:var(--glass);border:1px solid var(--glass-b);backdrop-filter:blur(14px);transition:transform .15s cubic-bezier(.3,.7,.4,1.4),background .2s}
+.act:active span{transform:scale(.92);background:rgba(220,0,50,.4)}
+h3{font-size:17px;margin:4px 4px 12px;display:flex;justify-content:space-between;align-items:center}
+.cards{display:flex;gap:14px;overflow-x:auto;padding:2px 2px 16px;scroll-snap-type:x mandatory;scrollbar-width:none}
+.cards::-webkit-scrollbar{display:none}
+.mini{min-width:210px;padding:18px;scroll-snap-align:start}
+.mini small{color:var(--muted);font-size:12px}
+.mini b{display:block;font-size:22px;margin:4px 0 10px}
+.chip{display:inline-block;font-size:11px;padding:5px 12px;border-radius:999px;background:rgba(61,220,151,.15);color:var(--ok)}
+.tx{padding:8px 16px}
+.row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.row:last-child{border:0}
+.ico{width:44px;height:44px;border-radius:999px;display:grid;place-items:center;background:rgba(255,255,255,.1);font-size:19px}
+.row div.t{flex:1}.row b{font-size:14.5px;display:block;font-weight:500}.row small{color:var(--muted);font-size:12px}
+.neg{color:#fff}.pos{color:var(--ok)}
+.row em{font-style:normal;font-weight:600;font-size:14.5px}
+
+/* profile */
+.prof{padding:28px 22px;text-align:center}
+.prof .avatar{width:84px;height:84px;font-size:32px;margin:0 auto 14px}
+.prof p{color:var(--muted);font-size:14px;margin-bottom:22px}
+
+/* bottom nav */
+nav{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);display:none;gap:6px;padding:8px;
+  border-radius:999px;z-index:10;width:min(380px,calc(100% - 32px))}
+nav.show{display:flex}
+nav button{flex:1;border:0;background:none;color:var(--muted);font:600 12px 'Poppins';padding:10px 6px;border-radius:999px;cursor:pointer;transition:.25s}
+nav button:active{transform:scale(.93)}
+nav button.on{background:linear-gradient(135deg,var(--red),var(--red-deep));color:#fff;box-shadow:0 4px 14px rgba(220,0,50,.45)}
+
+select{width:100%;padding:16px 44px 16px 20px;border-radius:999px;border:1px solid var(--glass-b);background:rgba(0,0,0,.25) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 20px center;color:#fff;font:500 15px 'Poppins';outline:none;appearance:none;-webkit-appearance:none}
+select:focus{border-color:#ff5a7a;box-shadow:0 0 0 4px rgba(220,0,50,.25)}
+select option{background:#2a0612;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.svc{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 6px;border-radius:24px;border:1px solid var(--glass-b);background:var(--glass);
+  backdrop-filter:blur(16px);color:#fff;font:500 12px 'Poppins';cursor:pointer;text-align:center;transition:transform .15s cubic-bezier(.3,.7,.4,1.4),background .2s}
+.svc span{font-size:28px}
+.svc:active{transform:scale(.94);background:rgba(220,0,50,.35)}
+.rec{display:none;text-align:center}
+.rec-ok{width:64px;height:64px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;font-size:30px;background:rgba(61,220,151,.18);color:var(--ok)}
+.rec p{padding:11px 16px;border-radius:18px;background:rgba(0,0,0,.3);margin:8px 0;font-size:14px;word-break:break-word}
+.rec p:first-of-type{font-weight:600;font-size:16px;letter-spacing:.5px}
+.sheet{max-height:92vh;overflow:auto}
+/* modal */
+.modal{position:fixed;inset:0;z-index:20;display:none;align-items:flex-end;justify-content:center;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
+.modal.show{display:flex}
+.sheet{width:100%;max-width:480px;padding:26px 22px 34px;border-radius:32px 32px 0 0;background:rgba(40,6,18,.85);animation:up .35s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes up{from{transform:translateY(100%)}}
+.sheet h3{font-size:20px;margin-bottom:16px}
+.toast{position:fixed;top:calc(18px + env(safe-area-inset-top));left:50%;transform:translate(-50%,-120px);z-index:30;padding:13px 22px;border-radius:999px;font-size:14px;font-weight:500;transition:transform .45s cubic-bezier(.3,1.3,.5,1)}
+.toast.show{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF2D5A"/><stop offset="1" stop-color="#AF144B"/></linearGradient>
+<symbol id="absa-icon" viewBox="0 0 56 56"><rect width="56" height="56" rx="18" fill="url(#rg)"/>
+<rect x="1" y="1" width="54" height="54" rx="17" fill="none" stroke="#fff" stroke-opacity=".28"/>
+<g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"><circle cx="25" cy="33" r="10"/><path d="M35 24v19"/></g>
+<circle cx="40" cy="14" r="4.2" fill="#fff"/></symbol>
+<symbol id="absa" viewBox="0 0 156 56"><g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="21" cy="32" r="15"/><path d="M36 22v25"/>
+<path d="M45 6v41"/><circle cx="60" cy="32" r="15"/>
+<path d="M109 22c-3-6-22-8-22 3 0 11 24 7 24 16 0 9-21 8-27 1"/>
+<circle cx="135" cy="32" r="15"/><path d="M150 22v25"/></g></symbol></defs></svg>
+<div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+<div class="toast glass" id="toast"></div>
+
+<!-- AUTH -->
+<section class="screen" id="auth">
+  <div class="glass auth-card">
+    <div class="brand"><svg class="ic" viewBox="0 0 56 56" aria-hidden="true"><use href="#absa-icon"/></svg><svg class="wm" viewBox="0 0 156 56" role="img" aria-label="absa"><use href="#absa"/></svg></div>
+    <h2 id="authTitle">Welcome back</h2>
+    <p class="sub" id="authSub">Sign in to your digital banking.</p>
+    <div class="tabs"><button class="on" data-m="in">Sign in</button><button data-m="up">Register</button></div>
+    <div style="height:16px"></div>
+    <div class="field" id="nameF" style="display:none"><input id="name" placeholder="Full name" autocomplete="name"></div>
+    <div class="field"><input id="email" type="email" placeholder="Email address" autocomplete="email"></div>
+    <div class="field"><input id="pass" type="password" placeholder="Password (min 8 characters)" autocomplete="current-password">
+      <button class="eye" id="eye" type="button" aria-label="Show password">👁</button></div>
+    <div class="msg" id="msg"></div>
+    <button class="btn block" id="go">Sign in</button>
+    <a class="forgot" id="forgot" href="#">Forgot password?</a>
+    <p class="note">Demo app for learning purposes. Not affiliated with Absa Group. Never use real banking passwords.</p>
+  </div>
+</section>
+
+<!-- HOME -->
+<section class="screen" id="home">
+  <div class="top">
+    <div class="hello"><small>Good day,</small><b id="hName">–</b></div>
+    <div class="avatar" id="hAv">A</div>
+  </div>
+  <div class="glass balance">
+    <small>Cheque account balance</small>
+    <div class="amount"><span id="bal">R 0.00</span><button id="hide" aria-label="Hide balance">👁</button></div>
+    <div class="acc-no">•••• •••• 4821</div>
+  </div>
+  <div class="actions">
+    <button class="act" data-a="beneficiary"><span>💸</span>Send</button>
+    <button class="act" data-a="bills"><span>🧾</span>Pay</button>
+    <button class="act" data-a="airtime"><span>📱</span>Buy</button>
+    <button class="act" data-a="save"><span>🐷</span>Save</button>
+  </div>
+  <h3>My accounts</h3>
+  <div class="cards">
+    <div class="glass mini"><small>Savings</small><b id="sav">R 0.00</b><span class="chip">+4.2% p.a.</span></div>
+    <div class="glass mini"><small>Credit card</small><b>R 12 500.00</b><span class="chip">Available</span></div>
+    <div class="glass mini"><small>Rewards</small><b>3 480 pts</b><span class="chip">Silver</span></div>
+  </div>
+  <h3>Recent activity</h3>
+  <div class="glass tx" id="txHome"></div>
+</section>
+
+<!-- SERVICES -->
+<section class="screen" id="services">
+  <div class="top"><div class="logo"><span class="brand sm"><svg class="ic" viewBox="0 0 56 56" aria-hidden="true"><use href="#absa-icon"/></svg><svg class="wm" viewBox="0 0 156 56" role="img" aria-label="absa"><use href="#absa"/></svg></span>Pay &amp; Buy</div></div>
+  <div class="grid" id="svGrid"></div>
+</section>
+
+<!-- ACTIVITY -->
+<section class="screen" id="activity">
+  <div class="top"><div class="logo"><span class="brand sm"><svg class="ic" viewBox="0 0 56 56" aria-hidden="true"><use href="#absa-icon"/></svg><svg class="wm" viewBox="0 0 156 56" role="img" aria-label="absa"><use href="#absa"/></svg></span>Activity</div></div>
+  <div class="glass tx" id="txAll"></div>
+</section>
+
+<!-- PROFILE -->
+<section class="screen" id="profile">
+  <div class="top"><div class="logo"><span class="brand sm"><svg class="ic" viewBox="0 0 56 56" aria-hidden="true"><use href="#absa-icon"/></svg><svg class="wm" viewBox="0 0 156 56" role="img" aria-label="absa"><use href="#absa"/></svg></span>Profile</div></div>
+  <div class="glass prof">
+    <div class="avatar" id="pAv">A</div>
+    <h3 style="justify-content:center;font-size:21px" id="pName">–</h3>
+    <p id="pMail">–</p>
+    <button class="btn block" id="logout">Sign out</button>
+  </div>
+</section>
+
+<nav class="glass" id="nav">
+  <button class="on" data-s="home">Home</button>
+  <button data-s="services">Services</button>
+  <button data-s="activity">Activity</button>
+  <button data-s="profile">Profile</button>
+</nav>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="sheet glass">
+    <div id="mForm">
+      <h3 id="mTitle">Service</h3>
+      <div id="mFields"></div>
+      <div class="msg" id="mMsg"></div>
+      <div style="display:flex;gap:10px">
+        <button class="btn ghost" id="mCancel" style="flex:1">Cancel</button>
+        <button class="btn" id="mOk" style="flex:1.4">Confirm</button>
+      </div>
+    </div>
+    <div class="rec" id="mRec">
+      <div class="rec-ok">✓</div><h3 style="justify-content:center">Successful</h3>
+      <div id="mLines"></div>
+      <button class="btn block" id="mDone" style="margin-top:12px">Done</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+/* Offline fallback: used only when the Firebase scripts cannot load (e.g. sandboxed previews) */
+if(typeof firebase==='undefined'||!firebase.auth||!firebase.database){
+  window.__LOCAL=true;
+  window.firebase=(()=>{
+    const mem={}, st={
+      get:k=>{try{return localStorage.getItem(k)}catch(e){return mem[k]||null}},
+      set:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){mem[k]=v}},
+      del:k=>{try{localStorage.removeItem(k)}catch(e){delete mem[k]}}};
+    const U=()=>JSON.parse(st.get('absa_local_users')||'{}'), sU=u=>st.set('absa_local_users',JSON.stringify(u));
+    const D=()=>JSON.parse(st.get('absa_local_db')||'{}'), sD=d=>st.set('absa_local_db',JSON.stringify(d));
+    let cur=st.get('absa_local_session'); const cbs=[], ls={};
+    const err=c=>{const e=new Error(c);e.code=c;return e};
+    const mk=e=>{const u=U()[e];return u?{uid:u.uid,email:e,displayName:u.name,
+      updateProfile:async o=>{const x=U();x[e].name=o.displayName;sU(x)}}:null};
+    const fire=()=>cbs.forEach(f=>f(cur?mk(cur):null));
+    const enc=t=>btoa(unescape(encodeURIComponent(t)));
+    const auth={
+      onAuthStateChanged(f){cbs.push(f);setTimeout(()=>f(cur?mk(cur):null),0)},
+      async createUserWithEmailAndPassword(e,pw){
+        const x=U(); if(x[e]) throw err('auth/email-already-in-use');
+        x[e]={uid:'local_'+Date.now(),pw:enc(pw),name:e.split('@')[0]}; sU(x);
+        cur=e; st.set('absa_local_session',e); fire(); return {user:mk(e)}},
+      async signInWithEmailAndPassword(e,pw){
+        const u=U()[e]; if(!u||u.pw!==enc(pw)) throw err('auth/invalid-credential');
+        cur=e; st.set('absa_local_session',e); fire(); return {user:mk(e)}},
+      async signOut(){cur=null;st.del('absa_local_session');fire()},
+      async sendPasswordResetEmail(){}
+    };
+    const snap=p=>{const v=D()[p];return {exists:()=>v!=null,val:()=>JSON.parse(JSON.stringify(v))}};
+    const db={ref:p=>({
+      on(ev,cb){ls[p]=cb;setTimeout(()=>cb(snap(p)),0)},
+      off(){delete ls[p]},
+      set(v){const d=D();d[p]=JSON.parse(JSON.stringify(v));sD(d);ls[p]&&ls[p](snap(p));return Promise.resolve()}
+    })};
+    return {initializeApp(){},auth:()=>auth,database:()=>db};
+  })();
+}
+firebase.initializeApp({
+  apiKey:"AIzaSyCAQGgUda3Io6HpDYWBWdqIV1rC6M75rk4",
+  authDomain:"nexus-40e33.firebaseapp.com",
+  databaseURL:"https://nexus-40e33-default-rtdb.firebaseio.com",
+  projectId:"nexus-40e33",
+  storageBucket:"nexus-40e33.firebasestorage.app",
+  messagingSenderId:"144604648056",
+  appId:"1:144604648056:web:d1f12fe2f4876f4ffed38d",
+  measurementId:"G-QNN58MFXKH"
+});
+const auth=firebase.auth(), db=firebase.database();
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const fmt=n=>'R '+Number(n).toLocaleString('en-ZA',{minimumFractionDigits:2,maximumFractionDigits:2});
+if(window.__LOCAL) $('.note').insertAdjacentHTML('beforeend','<br>⚠ Offline preview mode: Firebase could not load, so data stays in this browser only.');
+let mode='in', user=null, ref=null, hidden=false, action='send', creating=false;
+
+const ERR={
+  'auth/email-already-in-use':'An account with this email already exists.',
+  'auth/invalid-credential':'Incorrect email or password.',
+  'auth/wrong-password':'Incorrect email or password.',
+  'auth/user-not-found':'Incorrect email or password.',
+  'auth/invalid-email':'Enter a valid email address.',
+  'auth/weak-password':'Choose a stronger password (8+ characters).',
+  'auth/too-many-requests':'Too many attempts. Please wait a moment and try again.',
+  'auth/network-request-failed':'Network error. Check your connection.',
+  'auth/operation-not-allowed':'Email/Password sign-in is not enabled in the Firebase console yet.'
+};
+const seed=(name,email)=>({name,email,balance:24850.75,savings:61200,
+  tx:[{t:'Salary – Absa Payroll',d:'Today',a:32500,i:'💼'},{t:'Woolworths Food',d:'Yesterday',a:-684.2,i:'🛒'},
+      {t:'Uber Trip',d:'2 days ago',a:-132.5,i:'🚗'},{t:'Netflix',d:'3 days ago',a:-199,i:'🎬'},{t:'Discovery Vitality',d:'4 days ago',a:-420,i:'💪'}]});
+
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');setTimeout(()=>e.classList.remove('show'),2600)}
+function show(id){
+  $$('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
+  $('#nav').classList.toggle('show',id!=='auth');
+  $$('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.s===id));
+  scrollTo(0,0);
+}
+
+/* auth UI */
+$$('.tabs button').forEach(b=>b.onclick=()=>{
+  mode=b.dataset.m;
+  $$('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  $('#nameF').style.display=mode==='up'?'block':'none';
+  $('#authTitle').textContent=mode==='up'?'Open your profile':'Welcome back';
+  $('#authSub').textContent=mode==='up'?'Create your demo account in seconds.':'Sign in to your digital banking.';
+  $('#go').textContent=mode==='up'?'Create account':'Sign in';
+  $('#forgot').style.display=mode==='up'?'none':'block';
+  $('#pass').autocomplete=mode==='up'?'new-password':'current-password';
+  $('#msg').textContent='';
+});
+$('#eye').onclick=()=>{const p=$('#pass');p.type=p.type==='password'?'text':'password'};
+['email','pass','name'].forEach(i=>$('#'+i).addEventListener('keydown',e=>{if(e.key==='Enter')$('#go').click()}));
+
+$('#go').onclick=async()=>{
+  const msg=$('#msg'), email=$('#email').value.trim().toLowerCase(), pw=$('#pass').value, name=$('#name').value.trim(), btn=$('#go');
+  msg.className='msg';
+  if(!/^\S+@\S+\.\S+$/.test(email)) return msg.textContent='Enter a valid email address.';
+  if(pw.length<8) return msg.textContent='Password must be at least 8 characters.';
+  if(mode==='up'&&name.length<2) return msg.textContent='Please enter your full name.';
+  btn.disabled=true; msg.textContent='';
+  try{
+    if(mode==='up'){
+      creating=true;
+      const c=await auth.createUserWithEmailAndPassword(email,pw);
+      await c.user.updateProfile({displayName:name});
+      await db.ref('absa_users/'+c.user.uid).set(seed(name,email));
+      creating=false; msg.className='msg ok'; msg.textContent='Account created!';
+    }else{
+      await auth.signInWithEmailAndPassword(email,pw);
+    }
+    $('#pass').value='';
+  }catch(e){creating=false;msg.textContent=ERR[e.code]||('Something went wrong ('+(e.code||e.message)+').')}
+  finally{btn.disabled=false}
+};
+$('#forgot').onclick=async e=>{
+  e.preventDefault();
+  const email=$('#email').value.trim().toLowerCase(), msg=$('#msg');
+  if(!/^\S+@\S+\.\S+$/.test(email)){msg.className='msg';return msg.textContent='Enter your email above first.'}
+  try{await auth.sendPasswordResetEmail(email);msg.className='msg ok';msg.textContent='Reset link sent – check your inbox.'}
+  catch(err){msg.className='msg';msg.textContent=ERR[err.code]||'Could not send reset email.'}
+};
+
+/* session */
+auth.onAuthStateChanged(u=>{
+  if(ref){ref.off();ref=null}
+  if(!u){user=null;show('auth');return}
+  ref=db.ref('absa_users/'+u.uid);
+  ref.on('value',snap=>{
+    if(!snap.exists()){ if(!creating) ref.set(seed(u.displayName||u.email.split('@')[0],u.email)); return }
+    user=snap.val(); user.tx=user.tx||[];
+    $('#hName').textContent=user.name.split(' ')[0];
+    $('#pName').textContent=user.name; $('#pMail').textContent=user.email;
+    $('#hAv').textContent=$('#pAv').textContent=user.name[0].toUpperCase();
+    render();
+    if($('#auth').classList.contains('active')||!$('.screen.active')) show('home');
+  },err=>toast('Could not load your data ('+err.code+')'));
+});
+
+function render(){
+  $('#bal').textContent=hidden?'R ••••••':fmt(user.balance);
+  $('#sav').textContent=fmt(user.savings);
+  const row=x=>`<div class="row"><div class="ico">${x.i}</div><div class="t"><b>${x.t}</b><small>${x.d}</small></div>
+    <em class="${x.a>0?'pos':'neg'}">${x.a>0?'+':'−'} ${fmt(Math.abs(x.a))}</em></div>`;
+  $('#txHome').innerHTML=user.tx.slice(0,4).map(row).join('');
+  $('#txAll').innerHTML=user.tx.map(row).join('');
+}
+const persist=()=>{render();ref&&ref.set(user).catch(e=>toast('Save failed ('+e.code+')'))};
+$('#hide').onclick=()=>{hidden=!hidden;render()};
+$$('#nav button').forEach(b=>b.onclick=()=>show(b.dataset.s));
+$('#logout').onclick=async()=>{await auth.signOut();toast('Signed out securely')};
+
+/* services */
+const R=n=>Math.floor(Math.random()*n), dig=n=>Array.from({length:n},()=>R(10)).join(''), grp=(t,n)=>t.match(new RegExp('.{1,'+n+'}','g')).join(' ');
+const lot=()=>{const q=new Set();while(q.size<6)q.add(1+R(52));return [...q].sort((x,y)=>x-y).join(' · ')+'  |  Bonus '+(1+R(52))};
+const CELL=['cell','Cell number','tel'], AMT=['amt','Amount (R)','number'];
+const SV=[
+ {k:'cashsend',n:'Cash Send',i:'🏧',fee:12,f:[['to','Recipient cell number','tel'],AMT],r:()=>['Cash Send code: '+dig(6),'Collect at any Absa ATM within 24 hours']},
+ {k:'payshap',n:'PayShap',i:'⚡',f:[['to','ShapID or cell number','text'],AMT],r:()=>['Instant payment sent','Ref: PS'+dig(8)]},
+ {k:'beneficiary',n:'Pay Beneficiary',i:'👤',f:[['to','Beneficiary name','text','ben'],AMT],r:()=>['Payment sent']},
+ {k:'addben',n:'Add Beneficiary',i:'➕',free:1,f:[['to','Full name','text'],['acc','Account number','tel']],act:v=>{user.ben=user.ben||[];user.ben.push({name:v.to,acc:v.acc})},r:v=>[v.to+' saved to beneficiaries']},
+ {k:'electricity',n:'Electricity',i:'💡',f:[['meter','Meter number','tel'],AMT],r:(v,a)=>['Token: '+grp(dig(20),4),(a/2.85).toFixed(1)+' kWh purchased']},
+ {k:'airtime',n:'Airtime',i:'📱',f:[['net','Network','select',['Vodacom','MTN','Cell C','Telkom']],CELL,AMT],r:(v,a)=>['R'+a+' '+v.net+' airtime sent to '+v.cell]},
+ {k:'data',n:'Data',i:'📶',f:[['net','Network','select',['Vodacom','MTN','Cell C','Telkom']],CELL,['bundle','Bundle','select',['1GB|85','5GB|289','10GB|449','20GB|699']]],r:v=>[v.bundle+' data sent to '+v.cell]},
+ {k:'bills',n:'Pay Bills',i:'🧾',f:[['biller','Biller','select',['DStv','Municipality','Vodacom Contract','Telkom','Insurance','School fees']],['acc','Account number','text'],AMT],r:v=>['Payment to '+v.biller+' made']},
+ {k:'lotto',n:'Play Lotto',i:'🎰',f:[['draw','Game','select',['Lotto|5','Lotto Plus 1|5','Lotto Plus 2|5','PowerBall|10']]],r:v=>['Your numbers: '+lot(),v.draw+' · next draw Wed/Sat 9pm']},
+ {k:'voucher',n:'Buy Voucher',i:'🎟️',f:[['type','Voucher','select',['1Voucher R50|50','1Voucher R100|100','1Voucher R200|200','Uber Gift|150','Netflix Gift|179']]],r:v=>['PIN: '+grp(dig(16),4),v.type+' voucher']},
+ {k:'licence',n:'Renew Licence',i:'🪪',f:[['id','ID number','tel'],['type','Licence','select',['Driver’s licence card|250','Learner’s licence|100','PrDP permit|290']]],r:v=>[v.type+' renewal paid','Collect at your DLTC with ref below']},
+ {k:'disc',n:'Licence Disc',i:'🚗',f:[['plate','Registration number','text'],['type','Vehicle','select',['Light vehicle|520','Motorbike|215','Trailer|140','Heavy vehicle|1150']]],r:v=>[v.plate.toUpperCase()+' disc renewed','Valid for 12 months']},
+ {k:'bus',n:'Bus Ticket',i:'🚌',f:[['route','Route','select',['Pretoria → Johannesburg|95','Johannesburg → Durban|420','Johannesburg → Cape Town|650','Cape Town → Gqeberha|480']],['date','Travel date','date']],r:v=>['Ticket '+dig(8),v.route+' · '+v.date+' · Seat '+(1+R(60))]},
+ {k:'movies',n:'Movies',i:'🎬',f:[['movie','Movie name','text'],['type','Ticket','select',['Standard|85','Standard x2|170','IMAX|120','IMAX x2|240']]],r:v=>[v.movie+' · '+v.type.split('|')[0],'Show your QR code at the cinema']},
+ {k:'fines',n:'Traffic Fine',i:'🚦',f:[['notice','Notice number','text'],AMT],r:()=>['Fine paid in full']},
+ {k:'save',n:'Save',i:'🐷',f:[AMT],act:(v,a)=>{user.savings=+(user.savings+a).toFixed(2)},r:(v,a)=>[fmt(a)+' moved to savings']}
+];
+$('#svGrid').innerHTML=SV.filter(x=>x.k!=='save').map(x=>`<button class="svc" data-k="${x.k}"><span>${x.i}</span>${x.n}</button>`).join('');
+$('#svGrid').onclick=e=>{const b=e.target.closest('.svc');b&&openSv(b.dataset.k)};
+$$('.act').forEach(b=>b.onclick=()=>openSv(b.dataset.a));
+
+let sv=null;
+const lbl=x=>x.split('|')[0]+(x.includes('|')?' – R'+x.split('|')[1]:'');
+function openSv(k){
+  sv=SV.find(x=>x.k===k); $('#mTitle').textContent=sv.n;
+  $('#mFields').innerHTML=sv.f.map(([id,ph,t,o])=>t==='select'
+    ?`<div class="field"><select id="f_${id}"><option value="" disabled selected>${ph}</option>${o.map(x=>`<option value="${x}">${lbl(x)}</option>`).join('')}</select></div>`
+    :`<div class="field"><input id="f_${id}" placeholder="${ph}" type="${t}" ${t==='number'?'inputmode="decimal" min="0"':''} ${o==='ben'?'list="benl"':''}></div>`).join('')
+    +`<datalist id="benl">${(user.ben||[]).map(b=>`<option value="${b.name}">`).join('')}</datalist>`;
+  $('#mMsg').textContent=''; $('#mRec').style.display='none'; $('#mForm').style.display='block';
+  $('#modal').classList.add('show');
+}
+const closeM=()=>$('#modal').classList.remove('show');
+$('#mCancel').onclick=closeM; $('#mDone').onclick=closeM;
+$('#modal').onclick=e=>{if(e.target.id==='modal')closeM()};
+$('#mOk').onclick=()=>{
+  const v={}; let amt=0, bad=false, m=$('#mMsg');
+  sv.f.forEach(([id,ph,t])=>{
+    const val=$('#f_'+id).value.trim(); if(!val) bad=true;
+    if(t==='select'){const [l,p]=val.split('|'); v[id]=l; if(p) amt=+p} else {v[id]=val; if(id==='amt') amt=parseFloat(val)}
+  });
+  if(bad) return m.textContent='Please complete all fields.';
+  if(!sv.free&&!(amt>0)) return m.textContent='Enter a valid amount.';
+  const total=sv.free?0:amt+(sv.fee||0);
+  if(total>user.balance) return m.textContent='Insufficient funds.';
+  if(!sv.free){
+    user.balance=+(user.balance-total).toFixed(2);
+    user.tx.unshift({t:sv.n+' – '+Object.values(v)[0],d:'Just now',a:-total,i:sv.i});
+  }
+  sv.act&&sv.act(v,amt);
+  const lines=[...sv.r(v,amt)];
+  if(!sv.free) lines.push('Reference: ABS'+dig(9));
+  if(sv.fee) lines.push('Fee: '+fmt(sv.fee));
+  persist();
+  $('#mLines').innerHTML=lines.map(l=>`<p>${l}</p>`).join('');
+  $('#mForm').style.display='none'; $('#mRec').style.display='block';
+};
+</script>
+</body>
+</html>
