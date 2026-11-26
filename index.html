@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1a0309">
 <title>Absa Bank – Digital Banking</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2718%27 fill=%27%23DC0032%27/%3E%3Ccircle cx=%2730%27 cy=%2734%27 r=%2713%27 fill=%27none%27 stroke=%27white%27 stroke-width=%278%27/%3E%3Cpath d=%27M43 22v26%27 stroke=%27white%27 stroke-width=%278%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -48,9 +49,12 @@ body{font-family:'Poppins',system-ui,sans-serif;color:var(--text);background:var
 .screen{display:none;min-height:100vh;padding:24px 20px 110px;max-width:480px;margin:0 auto}
 .screen.active{display:block;animation:in .5s ease}
 @keyframes in{from{opacity:0;transform:translateY(16px)}}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:26px;letter-spacing:-.5px}
-.logo i{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--red),var(--red-deep));
-  display:grid;place-items:center;font-style:normal;font-size:22px;box-shadow:0 6px 18px rgba(220,0,50,.5)}
+.logo{display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;letter-spacing:-.3px}
+.brand{display:inline-flex;align-items:center;gap:12px;color:#fff;animation:pop .7s cubic-bezier(.3,1.4,.5,1)}
+.brand .ic{height:48px;width:48px;filter:drop-shadow(0 8px 16px rgba(220,0,50,.55))}
+.brand .wm{height:28px;width:auto;color:#fff;display:block}
+.brand.sm{gap:9px}.brand.sm .ic{height:34px;width:34px}.brand.sm .wm{height:19px}
+@keyframes pop{from{transform:scale(.8);opacity:0}}
 
 /* auth */
 #auth{display:none;align-items:center;justify-content:center}
@@ -129,13 +133,24 @@ nav button.on{background:linear-gradient(135deg,var(--red),var(--red-deep));colo
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF2D5A"/><stop offset="1" stop-color="#AF144B"/></linearGradient>
+<symbol id="absa-icon" viewBox="0 0 56 56"><rect width="56" height="56" rx="18" fill="url(#rg)"/>
+<rect x="1" y="1" width="54" height="54" rx="17" fill="none" stroke="#fff" stroke-opacity=".28"/>
+<g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"><circle cx="25" cy="33" r="10"/><path d="M35 24v19"/></g>
+<circle cx="40" cy="14" r="4.2" fill="#fff"/></symbol>
+<symbol id="absa" viewBox="0 0 156 56"><g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="21" cy="32" r="15"/><path d="M36 22v25"/>
+<path d="M45 6v41"/><circle cx="60" cy="32" r="15"/>
+<path d="M109 22c-3-6-22-8-22 3 0 11 24 7 24 16 0 9-21 8-27 1"/>
+<circle cx="135" cy="32" r="15"/><path d="M150 22v25"/></g></symbol></defs></svg>
 <div class="bg"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
 <div class="toast glass" id="toast"></div>
 
 <!-- AUTH -->
 <section class="screen" id="auth">
   <div class="glass auth-card">
-    <div class="logo"><i>A</i>absa</div>
+    <div class="brand"><svg class="ic" viewBox="0 0 56 56" aria-hidden="true"><use href="#absa-icon"/></svg><svg class="wm" viewBox="0 0 156 56" role="img" aria-label="absa"><use href="#absa"/></svg></div>
     <h2 id="authTitle">Welcome back</h2>
     <p class="sub" id="authSub">Sign in to your digital banking.</p>
     <div class="tabs"><button class="on" data-m="in">Sign in</button><button data-m="up">Register</button></div>
@@ -179,13 +194,13 @@ nav button.on{background:linear-gradient(135deg,var(--red),var(--red-deep));colo
 
 <!-- ACTIVITY -->
 <section class="screen" id="activity">
-  <div class="top"><div class="logo"><i>A</i>Activity</div></div>
+  <div class="top"><div class="logo"><span class="brand sm"><svg class="ic" viewBox="0 0 56 56" aria-hidden="true"><use href="#absa-icon"/></svg><svg class="wm" viewBox="0 0 156 56" role="img" aria-label="absa"><use href="#absa"/></svg></span>Activity</div></div>
   <div class="glass tx" id="txAll"></div>
 </section>
 
 <!-- PROFILE -->
 <section class="screen" id="profile">
-  <div class="top"><div class="logo"><i>A</i>Profile</div></div>
+  <div class="top"><div class="logo"><span class="brand sm"><svg class="ic" viewBox="0 0 56 56" aria-hidden="true"><use href="#absa-icon"/></svg><svg class="wm" viewBox="0 0 156 56" role="img" aria-label="absa"><use href="#absa"/></svg></span>Profile</div></div>
   <div class="glass prof">
     <div class="avatar" id="pAv">A</div>
     <h3 style="justify-content:center;font-size:21px" id="pName">–</h3>
